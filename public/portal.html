@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="fa" dir="rtl" data-lang="fa" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>NIGHTLINE · اشتراک شما</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23141210'/%3E%3Cpath d='M8 23V9h3l6 8.4V9h3v14h-3l-6-8.4V23z' fill='%23e9e5da'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="/style.css?v=1.0.4">
+<link rel="stylesheet" href="/extra.css?v=1.0.4">
+<style>
+  /* long subscription links must wrap inside the column, never stretch the page */
+  .user-links,.link-row{max-width:100%;min-width:0}
+  .link-row .lk-uri{
+    white-space:normal;overflow:visible;text-overflow:clip;
+    overflow-wrap:anywhere;word-break:break-all;min-width:0;
+  }
+  .wrap{max-width:var(--maxw,1140px);margin-inline:auto}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="wrap">
+  <header class="masthead">
+    <div class="topline">
+      <span class="tick">SUBSCRIBER VIEW</span>
+      <span class="bar"></span>
+      <button class="sw" id="lang" type="button">EN</button>
+      <div class="theme-grp">
+        <button class="sw t-pick" data-th="light" type="button">LIGHT</button>
+        <button class="sw t-pick" data-th="dark" type="button">DARK</button>
+      </div>
+    </div>
+    <h1 class="mast-title">NIGHTLINE <span class="rail-tag">Railway</span></h1>
+    <div class="subline">
+      <span class="fa">صفحهٔ اختصاصی اشتراک شما — لینک‌ها، حجم و QR</span>
+      <span class="en">Your private subscription page — links, quota and QR</span>
+    </div>
+  </header>
+
+  <div class="free-ribbon">
+    <span class="fa"><strong>رایگان و غیرقابل فروش</strong> — اگر بابت این سرویس پولی پرداخت کرده‌اید، فریب خورده‌اید.</span>
+    <span class="en"><strong>FREE &amp; NOT FOR SALE</strong> — if you paid for this service you were misled.</span>
+  </div>
+
+  <div id="content" style="margin-top:14px">
+    <div class="card"><p class="kicker">…</p><div class="meter"><i style="width:40%"></i></div></div>
+  </div>
+
+  <div class="free-strip" style="margin-top:16px">
+    <svg class="ic ic-sm"><use href="#i-shield"/></svg>
+    <span><strong>100% FREE · NOT FOR SALE</strong> — <span class="fa">این اشتراک رایگان است؛ فروش آن تخلف محسوب می‌شود.</span><span class="en">This subscription is free; selling it is a violation.</span></span>
+  </div>
+
+  <footer class="colophon" style="margin-top:22px">
+    <span class="mono">NIGHTLINE · RAILWAY EDITION</span>
+  </footer>
+</div>
+<script src="/js/qrcode.js?v=1.0.4"></script>
+<script type="module">
+const token = location.pathname.split('/').filter(Boolean)[1] || '';
+const state = { data: null };
+
+const $ = (s) => document.querySelector(s);
+const t = (fa, en) => `<span class="fa">${fa}</span><span class="en">${en}</span>`;
+const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const icon = (n, cls = 'ic') => `<svg class="${cls}"><use href="#i-${n}"/></svg>`;
+
+function bytes(n) {
+  n = Number(n) || 0;
+  if (n < 1024) return `${n} B`;
+  const u = ['KB', 'MB', 'GB', 'TB'];
+  let v = n / 1024, i = 0;
+  while (v >= 1024 && i < u.length - 1) { v /= 1024; i += 1; }
+  return `${v.toFixed(v >= 10 ? 1 : 2)} ${u[i]}`;
+}
+
+function setLang(lang) {
+  document.documentElement.dataset.lang = lang;
+  document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
+  $('#lang').textContent = lang === 'fa' ? 'EN' : 'فا';
+  localStorage.setItem('nl-lang', lang);
+  if (state.data) render();
+}
+
+function setTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  document.querySelectorAll('.t-pick').forEach((b) => b.classList.toggle('active', b.dataset.th === theme));
+  localStorage.setItem('nl-theme', theme);
+}
+
+function qr(text) {
+  try {
+    const q = qrcode(0, 'M');
+    q.addData(text); q.make();
+    return `<div class="qrbox qr">${q.createSvgTag({ cellSize: 2, margin: 4, scalable: true })}</div>`;
+  } catch { return ''; }
+}
+
+function render() {
+  const d = state.data;
+  const percent = d.quotaGb ? Math.min(100, Math.round((d.usageGb / d.quotaGb) * 100)) : 0;
+  $('#content').innerHTML = `
+    <div class="cols">
+      <div class="card">
+        <p class="kicker">${icon('users')}${t('حساب شما', 'YOUR ACCOUNT')}</p>
+        <h2 class="head" style="font-size:26px;margin:0 0 4px">${esc(d.name)}</h2>
+        <div class="chips" style="margin-top:6px">
+          <span class="badge ${d.status === 'active' ? 'ok' : 'bad'}">${esc(d.status)}</span>
+          <span class="chip">${d.links.length} ${t('لینک', 'LINKS')}</span>
+        </div>
+        <table class="tbl" style="margin-top:10px">
+          <tbody>
+            <tr><th>${t('مصرف', 'USAGE')}</th><td class="mono">${d.usageGb} GB</td></tr>
+            <tr><th>${t('سهمیه', 'QUOTA')}</th><td class="mono">${d.quotaGb ? d.quotaGb + ' GB' : '∞'}</td></tr>
+            <tr><th>${t('انقضا', 'EXPIRES')}</th><td class="mono">${d.expiresAt ? new Date(d.expiresAt).toISOString().slice(0, 10) : '∞'}</td></tr>
+          </tbody>
+        </table>
+        ${d.quotaGb ? `<div class="meter" style="margin-top:10px"><i style="width:${percent}%"></i></div>` : ''}
+        <div class="actions">
+          <a class="btn primary sm-btn" href="/sub/${esc(token)}" target="_blank" rel="noopener">${icon('download', 'ic ic-sm')}${t('افزودن به کلاینت', 'IMPORT SUBSCRIPTION')}</a>
+          <button class="btn ghost sm-btn" id="copy-sub" type="button">${icon('copy', 'ic ic-sm')}${t('کپی آدرس', 'COPY URL')}</button>
+        </div>
+        <p class="hint">${t('آدرس اشتراک را در v2rayNG، Hiddify، sing-box یا Clash اضافه کنید و از منوی خود کلاینت تازه‌سازی کنید.', 'Add the subscription URL in v2rayNG, Hiddify, sing-box or Clash and refresh from the client menu.')}</p>
+      </div>
+
+      <div class="card card-subtle">
+        <p class="kicker">${icon('qr')}${t('اسکن سریع', 'SCAN TO IMPORT')}</p>
+        <div class="qr-center">
+          ${qr(location.origin + '/sub/' + token)}
+          <p class="code-line" style="margin-top:8px;font-size:10px;max-width:100%;overflow-wrap:anywhere">${esc(location.origin + '/sub/' + token)}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:14px">
+      <p class="kicker">${icon('link')}${t('لینک مستقیم پروتکل‌ها', 'PER-PROTOCOL LINKS')}</p>
+      <div class="stack-sm">
+        ${d.links.map((l) => `
+          <div class="link-row">
+            <span class="lk-name">${esc(l.protocol.toUpperCase())} · ${esc(l.transport)} · ${esc(l.core)}</span>
+            <span class="lk-uri">${esc(l.uri)}</span>
+            <button class="mini" data-copy="${esc(l.uri)}" type="button">${icon('copy', 'ic ic-sm')}</button>
+            <button class="mini" data-qr="${esc(l.uri)}" type="button">${icon('qr', 'ic ic-sm')}</button>
+          </div>`).join('')}
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:14px" id="qr-card" hidden>
+      <p class="kicker">${icon('qr')}QR</p>
+      <div class="qr-center" id="qr-slot"></div>
+    </div>`;
+}
+
+document.addEventListener('click', (e) => {
+  const copyBtn = e.target.closest('[data-copy]');
+  if (copyBtn) { navigator.clipboard?.writeText(copyBtn.dataset.copy); return; }
+  const qrBtn = e.target.closest('[data-qr]');
+  if (qrBtn) {
+    $('#qr-card').hidden = false;
+    $('#qr-slot').innerHTML = qr(qrBtn.dataset.qr);
+    $('#qr-card').scrollIntoView({ behavior: 'smooth' });
+    return;
+  }
+  if (e.target.closest('#copy-sub')) navigator.clipboard?.writeText(location.origin + '/sub/' + token);
+});
+
+setTheme(localStorage.getItem('nl-theme') || 'dark');
+setLang(localStorage.getItem('nl-lang') || 'fa');
+$('#lang').addEventListener('click', () => setLang(document.documentElement.dataset.lang === 'fa' ? 'en' : 'fa'));
+document.querySelectorAll('.t-pick').forEach((b) => b.addEventListener('click', () => setTheme(b.dataset.th)));
+
+async function injectSprite() {
+  try {
+    const res = await fetch('/sprite.svg');
+    const text = await res.text();
+    document.body.insertAdjacentHTML('afterbegin', text.replace('<svg ', '<svg hidden aria-hidden="true" '));
+  } catch { /* icons degrade to nothing */ }
+}
+
+await injectSprite();
+fetch(`/u/${token}?json=1`).then((r) => r.json()).then((data) => {
+  if (data.error) throw new Error(data.error);
+  state.data = data;
+  render();
+}).catch((err) => {
+  $('#content').innerHTML = `<div class="card"><div class="err">${esc(err.message)}</div></div>`;
+});
+</script>
+</body>
+</html>

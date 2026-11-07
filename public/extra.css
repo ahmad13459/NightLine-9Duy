@@ -1,0 +1,667 @@
+/* ============================================================================
+   NIGHTLINE · RAILWAY EDITION — additive components
+   Same newsprint language as style.css: hairline rules, hard offset shadows,
+   monospace numerals, zero rounded corners.
+   ========================================================================== */
+
+/* the small "Railway" tag that sits next to the masthead wordmark --------- */
+.rail-tag{
+  display:inline-flex;align-items:center;gap:5px;
+  vertical-align:middle;margin-inline-start:10px;
+  font-family:var(--en-font);font-size:11px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;
+  padding:4px 8px;border:1.5px solid var(--ink);
+  background:var(--paper-2);color:var(--ink);
+  box-shadow:3px 3px 0 var(--sh-c);
+  position:relative;top:-.25em;
+}
+.rail-tag .ic{width:12px;height:12px}
+@media (max-width:640px){
+  .rail-tag{font-size:9px;padding:3px 6px;margin-inline-start:7px;box-shadow:2px 2px 0 var(--sh-c)}
+  .rail-tag .ic{width:10px;height:10px}
+}
+
+/* KPI strip ---------------------------------------------------------------*/
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:12px}
+.kpi{
+  border:1.5px solid var(--ink);background:var(--paper-2);
+  padding:10px 12px;min-width:0;
+}
+.kpi .lbl{
+  display:flex;align-items:center;gap:6px;
+  font-family:var(--en-font);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-faint);margin:0 0 5px;
+}
+html[data-lang="fa"] .kpi .lbl{font-family:var(--fa-font);letter-spacing:0;font-size:11px}
+.kpi .val{font-family:var(--en-font);font-size:19px;font-weight:700;direction:ltr;unicode-bidi:isolate;display:block;line-height:1.25}
+.kpi .sub{font-size:10.5px;color:var(--ink-faint);font-family:var(--en-font);direction:ltr;unicode-bidi:isolate}
+
+/* endpoints ---------------------------------------------------------------*/
+.endpoint{
+  display:flex;flex-wrap:wrap;align-items:center;gap:8px;
+  border:1px solid var(--ink);background:var(--paper-2);
+  padding:7px 10px;margin-top:6px;
+}
+.endpoint .ep-key{
+  font-family:var(--en-font);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-faint);min-width:74px;
+}
+.endpoint .ep-val{
+  flex:1;min-width:0;font-family:var(--en-font);font-size:11.5px;
+  direction:ltr;unicode-bidi:isolate;overflow-wrap:anywhere;
+}
+.endpoint .mini{width:28px;height:26px;font-size:12px}
+
+/* inbound / protocol cards ------------------------------------------------*/
+.proto-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:12px;margin-top:12px}
+.proto-card{
+  border:1.5px solid var(--ink);background:var(--paper);
+  padding:12px 13px;display:grid;gap:9px;box-shadow:var(--shadow-sm);
+  position:relative;
+}
+.proto-card.is-off{background:var(--paper-2);opacity:.82}
+.proto-card.is-off .proto-name{text-decoration:line-through;text-decoration-thickness:1px}
+.proto-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.proto-name{font-size:14px;font-weight:700;line-height:1.4;display:flex;align-items:center;gap:7px;min-width:0}
+.proto-name .ic{width:15px;height:15px;flex:none}
+.chips{display:flex;flex-wrap:wrap;gap:5px}
+.chip{
+  font-family:var(--en-font);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;
+  padding:2px 6px;border:1px solid var(--ink);background:var(--paper-2);color:var(--ink);
+}
+.chip.xray{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+.chip.singbox{border-style:dashed}
+.chip.warn{border-color:var(--red);color:var(--red)}
+.chip.ok{border-color:var(--ok);color:var(--ok)}
+.proto-meta{
+  font-family:var(--en-font);font-size:10.5px;color:var(--ink-soft);
+  direction:ltr;unicode-bidi:isolate;display:grid;gap:2px;
+  border-top:1px dotted var(--ink);padding-top:7px;
+}
+.proto-meta b{font-weight:700}
+.proto-acts{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+
+/* toggle switch (newsprint flavoured) -------------------------------------*/
+.tgl{
+  display:inline-flex;align-items:center;gap:6px;cursor:pointer;
+  font-family:var(--en-font);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  user-select:none;
+}
+.tgl input{position:absolute;opacity:0;width:0;height:0}
+.tgl .track{
+  width:36px;height:18px;border:1.5px solid var(--ink);background:var(--paper-2);
+  display:inline-block;position:relative;transition:background-color .16s ease;
+}
+.tgl .track::after{
+  content:"";position:absolute;top:1px;left:1px;width:12px;height:12px;
+  background:var(--ink);transition:transform .16s cubic-bezier(.22,1,.36,1);
+}
+html[dir="rtl"] .tgl .track::after{left:auto;right:1px}
+.tgl input:checked + .track{background:var(--ink)}
+.tgl input:checked + .track::after{background:var(--paper);transform:translateX(18px)}
+html[dir="rtl"] .tgl input:checked + .track::after{transform:translateX(-18px)}
+
+/* preset directory --------------------------------------------------------*/
+.preset-group{margin-top:14px}
+.preset-group > h3{
+  font-family:var(--en-font);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  margin:0 0 8px;padding-bottom:5px;border-bottom:1px solid var(--ink);
+  display:flex;align-items:center;gap:7px;
+}
+.preset-list{display:grid;gap:7px}
+.preset-row{
+  display:flex;flex-wrap:wrap;align-items:center;gap:9px;
+  border:1px solid var(--ink);background:var(--paper-2);padding:8px 10px;
+}
+.preset-row .pr-main{flex:1;min-width:170px}
+.preset-row .pr-title{font-size:12.5px;font-weight:700;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.preset-row .pr-desc{font-size:11px;color:var(--ink-faint);line-height:1.6;margin-top:2px}
+
+/* log console -------------------------------------------------------------*/
+.console{
+  border:1.5px solid var(--ink);background:#12110f;color:#e7e1d2;
+  font-family:var(--en-font);font-size:10.5px;line-height:1.65;
+  padding:9px 11px;max-height:280px;overflow:auto;
+  direction:ltr;text-align:left;white-space:pre-wrap;word-break:break-all;
+}
+html[data-theme="light"] .console{background:#1b1a17}
+.console .ln{display:block;opacity:.92}
+.console .ln.err{color:#e9897a}
+.console .ln.warn{color:#dcc27a}
+
+/* tables ------------------------------------------------------------------*/
+.tbl{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px}
+.tbl th{
+  font-family:var(--en-font);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-faint);font-weight:500;text-align:start;padding:6px 5px;
+  border-bottom:1.5px solid var(--ink);white-space:nowrap;
+}
+.tbl td{padding:7px 5px;border-bottom:1px dotted var(--ink);vertical-align:middle;min-width:0}
+.tbl tr:last-child td{border-bottom:none}
+.tbl .mono{font-size:11.5px}
+.tbl-wrap{overflow-x:auto}
+
+/* misc --------------------------------------------------------------------*/
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.spread{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
+.stack-sm{display:grid;gap:8px}
+.dashed{border-top:1px dashed var(--ink);opacity:.55;margin:12px 0}
+.code-line{
+  font-family:var(--en-font);font-size:11px;direction:ltr;unicode-bidi:isolate;
+  border:1px solid var(--ink);background:var(--paper-2);padding:7px 9px;
+  overflow-wrap:anywhere;line-height:1.6;
+}
+.muted{color:var(--ink-faint)}
+.center{text-align:center}
+.spacer{flex:1}
+.nowrap{white-space:nowrap}
+.big-num{font-family:var(--en-font);font-size:26px;font-weight:700;line-height:1.1}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:760px){.grid-2{grid-template-columns:1fr}}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media (max-width:900px){.grid-3{grid-template-columns:1fr}}
+.qr-inline .qr svg{width:132px;height:132px}
+.user-links{display:grid;gap:5px;margin-top:9px}
+.link-row{
+  display:flex;flex-wrap:wrap;align-items:center;gap:7px;
+  border:1px dotted var(--ink-faint);background:var(--paper);
+  padding:6px 8px;font-size:11px;
+}
+.link-row .lk-name{flex:1;min-width:130px;font-family:var(--en-font);font-size:10.5px;letter-spacing:.05em}
+.link-row .lk-uri{
+  flex:2;min-width:150px;font-family:var(--en-font);font-size:10px;
+  color:var(--ink-faint);direction:ltr;unicode-bidi:isolate;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.spark{width:100%;height:88px;display:block}
+.pill-group{display:inline-flex;border:1.5px solid var(--ink)}
+.pill-group .pill{
+  font-family:var(--en-font);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  padding:5px 9px;border:none;border-inline-start:1px solid var(--ink);
+  background:var(--paper);color:var(--ink);cursor:pointer;
+}
+.pill-group .pill:first-child{border-inline-start:none}
+.pill-group .pill.active{background:var(--ink);color:var(--paper)}
+.note-inline{
+  font-size:11px;border-inline-start:2px solid var(--red);padding-inline-start:8px;
+  color:var(--red);margin-top:7px;line-height:1.65;
+}
+.file-input{font-family:var(--en-font);font-size:11px}
+.colophon a{color:inherit}
+
+/* permanent free / not-for-sale badge -------------------------------------- */
+.free-badge{
+  position:fixed;inset-inline-start:10px;bottom:10px;z-index:55;
+  display:inline-flex;align-items:center;gap:6px;
+  padding:5px 9px;border:1.5px solid var(--ink);background:var(--paper);
+  box-shadow:3px 3px 0 var(--sh-c);
+  font-family:var(--en-font);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink);opacity:.92;
+  pointer-events:none;
+}
+.free-badge .fb-fa{display:none;font-family:var(--fa-font);letter-spacing:0;font-size:10px}
+html[data-lang="fa"] .free-badge .fb-txt{display:none}
+html[data-lang="fa"] .free-badge .fb-fa{display:inline}
+@media (max-width:520px){
+  .free-badge{font-size:8.5px;padding:4px 7px;inset-inline-start:6px;bottom:6px}
+}
+.free-strip{
+  display:flex;flex-wrap:wrap;align-items:center;gap:8px;
+  border:1.5px solid var(--ink);background:var(--paper-2);
+  padding:8px 11px;margin-top:10px;font-size:12px;
+}
+.free-strip strong{font-weight:700}
+.free-strip .mono{font-size:10px;letter-spacing:.1em}
+
+/* seven tabs, one row ------------------------------------------------------ */
+.nav-tabs{grid-template-columns:repeat(10,1fr);gap:6px}
+@media (max-width:1240px){.nav-tabs{grid-template-columns:repeat(5,1fr)}}
+@media (max-width:900px){.nav-tabs{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:560px){.nav-tabs{grid-template-columns:repeat(2,1fr)}}
+
+/* keep the Railway tag on the wordmark line ------------------------------- */
+.mast-title{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px 14px;line-height:1.05}
+.masthead{text-align:center}
+.masthead .free-ribbon{justify-content:center;text-align:center}
+.masthead .subline{justify-content:center;text-align:center}
+.masthead .topline{text-align:start}
+.mast-title .rail-tag{top:0;margin-inline-start:0;align-self:center}
+@media (max-width:640px){.mast-title{gap:6px}}
+
+/* toggle knob ------------------------------------------------------------- */
+.tgl .track{border-width:1.5px}
+.tgl .track::after{top:1.5px;inset-inline-start:1.5px;width:12px;height:12px}
+.tgl input:checked + .track::after{transform:translateX(18px)}
+html[dir="rtl"] .tgl input:checked + .track::after{transform:translateX(-18px)}
+
+/* long proxy links: full width rows, qr below ----------------------------- */
+.link-stack{display:grid;gap:7px;margin-top:10px}
+.proxy-qr-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:10px}
+.proxy-qr-row .qr-center{flex:0 0 auto}
+.proxy-qr-row .hint{flex:1;min-width:180px;margin:0}
+
+/* login / setup screen: keep the sheet optically centred -------------------- */
+#auth{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding-block:22px}
+#auth .cols{margin-top:22px!important}
+@media (max-width:760px){#auth{min-height:0;padding-block:10px}}
+
+/* ── easy setup / network analysis ─────────────────────────────────────── */
+.easy-hero .lede{font-size:13px;line-height:1.9;margin:2px 0 10px;max-width:74ch}
+.easy-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border:1.5px solid var(--ink);margin-bottom:10px}
+.easy-stats .stat{display:flex;flex-direction:column;gap:2px;padding:8px 10px;border-inline-end:1.5px dotted var(--ink)}
+.easy-stats .stat:last-child{border-inline-end:none}
+.easy-stats .stat .tnum{font-family:var(--mono);font-size:20px;line-height:1}
+.easy-stats .stat span:last-child{font-size:10px;letter-spacing:.06em;opacity:.7}
+
+.profiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin-top:8px}
+.profile{border:1.5px dashed var(--ink);padding:10px;display:flex;flex-direction:column;gap:6px;background:transparent}
+.profile.current{border-style:solid;background:var(--ink);color:var(--paper)}
+.profile.current .muted,.profile.current .ticks li{opacity:.85}
+.profile-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.profile-head strong{font-size:13px}
+.profile .muted{font-size:11px;line-height:1.7;margin:0}
+.profile .btn{margin-top:auto}
+.ticks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:3px}
+.ticks li{position:relative;padding-inline-start:14px;font-size:11px;line-height:1.7}
+.ticks li::before{content:"";position:absolute;inset-inline-start:0;top:.55em;width:6px;height:6px;background:currentColor}
+
+.pill{display:inline-flex;align-items:center;gap:4px;border:1.2px solid var(--ink);padding:1px 6px;font-size:10px;letter-spacing:.05em;white-space:nowrap}
+.pill.ok{background:var(--ink);color:var(--paper)}
+.pill.warn{border-style:dashed}
+.pill.off{opacity:.5}
+
+.check{display:flex;align-items:flex-start;gap:8px;font-size:12px;line-height:1.7;padding:4px 0;border-bottom:1px dotted var(--ink)}
+.check:last-child{border-bottom:none}
+.check .dot{flex:none;width:9px;height:9px;margin-top:.45em;border:1.5px solid var(--ink)}
+.check.ok .dot{background:var(--ink)}
+.check.warn .dot{background:transparent}
+
+.tips{margin:0;padding-inline-start:16px;display:flex;flex-direction:column;gap:6px}
+.tips li{font-size:12px;line-height:1.85}
+
+.row-line{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px dotted var(--ink)}
+.row-line .muted{margin:0;font-size:11px}
+.uri{display:block;direction:ltr;text-align:left;font-family:var(--mono);font-size:11px;word-break:break-all;padding:6px 8px;border:1.2px solid var(--ink);margin:6px 0 12px;background:transparent}
+
+@media (max-width:720px){
+  .easy-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .easy-stats .stat:nth-child(2){border-inline-end:none}
+}
+
+/* raw config editor */
+.raw-box{
+  width:100%;min-height:44vh;direction:ltr;text-align:left;
+  font-family:var(--mono);font-size:11.5px;line-height:1.6;
+  padding:10px;border:1.5px solid var(--ink);background:transparent;color:inherit;resize:vertical;
+}
+.raw-box:focus{outline:none;box-shadow:inset 0 0 0 1.5px var(--ink)}
+
+/* ── railynx ───────────────────────────────────────────────────────────── */
+.rl-link{min-height:90px;font-size:11px}
+.rl-select{
+  width:100%;margin-bottom:6px;padding:6px 8px;border:1.2px solid var(--ink);
+  background:transparent;color:inherit;font-family:inherit;font-size:12px;
+}
+.rl-progress{margin-top:10px}
+.rl-bar{height:10px;border:1.5px solid var(--ink);position:relative;overflow:hidden}
+.rl-bar span{position:absolute;inset-block:0;inset-inline-start:0;background:var(--ink);transition:width .35s linear}
+.rl-recent{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.chip.ok{background:var(--ink);color:var(--paper)}
+
+/* keep the whole strip on one row */
+@media (min-width:1241px){
+  .tab-btn{padding:8px 7px;font-size:11.5px;gap:3px}
+  .tab-btn .tab-lbl{gap:5px;white-space:nowrap}
+  .tab-btn .tnum{font-size:9px}
+}
+
+/* ── status board (top of the panel) ───────────────────────────────────── */
+.status-board{
+  display:flex;flex-wrap:wrap;align-items:stretch;gap:10px;
+  border:1.5px solid var(--ink);padding:10px;margin-top:12px;background:var(--paper);
+}
+.status-grid{
+  flex:1 1 640px;min-width:0;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;
+}
+.s-cell{
+  display:grid;grid-template-columns:auto 1fr;grid-template-areas:"dot label" "dot value";
+  align-items:center;gap:0 8px;padding:6px 9px;border:1.2px dotted var(--ink);min-width:0;
+}
+.s-cell .s-dot{grid-area:dot;width:8px;height:8px;border:1.5px solid var(--ink)}
+.s-cell.on .s-dot{background:var(--ink)}
+.s-cell.off{border-style:dashed;opacity:.62}
+.s-cell .s-label{grid-area:label;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.7;white-space:nowrap}
+.s-cell .s-value{
+  grid-area:value;font-family:var(--mono);font-size:11px;line-height:1.35;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.status-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+
+/* repo / credit links */
+.repo-chip,.foot-link{
+  display:inline-flex;align-items:center;gap:6px;border:1.2px solid var(--ink);
+  padding:2px 8px;font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;
+  text-decoration:none;color:inherit;direction:ltr;white-space:nowrap;
+}
+.repo-chip:hover,.foot-link:hover{background:var(--ink);color:var(--paper)}
+.free-ribbon{flex-wrap:wrap;gap:6px 10px}
+.colophon{flex-wrap:wrap;gap:8px 14px}
+
+/* never let long machine text punch out of a card */
+.card,.cols,.cols>*,.row-line{min-width:0}
+.tbl{width:100%;table-layout:auto}
+.console,.raw-box,.uri,.mono{overflow-wrap:anywhere}
+.console{white-space:pre-wrap;max-height:320px;overflow:auto}
+
+/* railynx credit */
+.credit-card{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;
+  border:1.5px dashed var(--ink);padding:9px 12px;margin-top:12px;
+}
+.credit-card .who{display:flex;flex-direction:column;gap:2px;min-width:0}
+.credit-card .who b{font-size:12.5px}
+.credit-card .who span{font-size:11px;opacity:.72;line-height:1.6}
+.credit-card .links{display:flex;gap:8px;flex-wrap:wrap}
+.s-cell.wide .s-value{font-size:10.5px;white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere}
+.status-grid .s-cell.wide{min-width:0}
+
+/* link ping chips */
+.ping{font-family:var(--mono);font-size:10px;padding:1px 5px;border:1.2px solid var(--ink);white-space:nowrap}
+.ping.ok{background:var(--ink);color:var(--paper)}
+.ping.bad{border-style:dashed;opacity:.65}
+.s-cell .nw{white-space:nowrap}
+.repo-chip svg,.foot-link svg{flex:0 0 auto}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   1.0.4 · routing + host rescue
+   One rhythm for every pane, no card touching its neighbour, and a single
+   easing curve for all transitions instead of a dozen ad-hoc durations.
+   ═══════════════════════════════════════════════════════════════════════ */
+:root{
+  --gap:16px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --dur:190ms;
+  --radius:0px;
+}
+
+/* vertical rhythm ------------------------------------------------------- */
+.tab-pane{margin-top:var(--gap)}
+.tab-pane > .cols,
+.tab-pane > .cols-even,
+.tab-pane > .stack,
+.tab-pane > .grid-2{margin-top:0}
+
+.cols,.cols-even{display:grid;gap:var(--gap);align-items:start}
+.cols{grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr)}
+.cols-even{grid-template-columns:repeat(2,minmax(0,1fr))}
+.stack{display:grid;gap:var(--gap)}
+.stack-sm{display:grid;gap:10px}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gap)}
+.cols > .card,.cols-even > .card,.cols > .stack,.cols-even > .stack{margin:0}
+
+/* a card never eats its neighbour's space ------------------------------ */
+.card{padding:18px 20px;min-width:0;overflow-wrap:anywhere}
+.card + .card{margin-top:0}
+.card > .kicker,.card > .lede{margin-bottom:12px}
+.card > .kicker{margin-top:0}
+.card > .dashed{margin:14px 0}
+.card > .actions{margin-top:16px;padding-top:0}
+.card > .actions:first-child{margin-top:0}
+.card > .hint:last-child{margin-bottom:0}
+.card > p:last-child,.card > ul:last-child,.card > ol:last-child{margin-bottom:0}
+
+/* section label (the newspaper kicker) */
+.kicker{display:flex;align-items:center;gap:8px;line-height:1.5;margin:0 0 12px}
+
+/* forms --------------------------------------------------------------- */
+.field-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 18px}
+.field-grid > div{min-width:0}
+.fld-label{display:block;margin-bottom:6px;line-height:1.4}
+input[type="text"],input[type="number"],input[type="password"],select,textarea{
+  width:100%;min-height:38px;padding:8px 10px;line-height:1.4;
+  transition:border-color var(--dur) var(--ease),box-shadow var(--dur) var(--ease),background-color var(--dur) var(--ease);
+}
+textarea{min-height:88px}
+input:focus-visible,select:focus-visible,textarea:focus-visible{outline:none;box-shadow:inset 0 0 0 1.5px var(--ink)}
+label.chk{display:flex;align-items:center;gap:9px;min-height:30px;line-height:1.5}
+label.chk input[type="checkbox"]{width:16px;height:16px;min-height:0;flex:0 0 auto;accent-color:var(--ink)}
+
+/* buttons ------------------------------------------------------------- */
+.btn,.mini,.tab-btn{transition:background-color var(--dur) var(--ease),color var(--dur) var(--ease),
+  border-color var(--dur) var(--ease),transform var(--dur) var(--ease),box-shadow var(--dur) var(--ease)}
+.btn{min-height:36px;padding:7px 13px;line-height:1.35;white-space:normal;text-align:center}
+.btn:active,.mini:active,.tab-btn:active{transform:translateY(1px)}
+.btn:focus-visible,.mini:focus-visible,.tab-btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;align-items:center}
+
+/* tables -------------------------------------------------------------- */
+.tbl{border-collapse:separate;border-spacing:0;width:100%}
+.tbl th,.tbl td{padding:9px 10px;line-height:1.5;vertical-align:middle}
+.tbl tbody tr + tr td{border-top:1px dotted var(--ink-faint)}
+
+/* lists used inside cards --------------------------------------------- */
+.ticks{display:grid;gap:7px;margin:0;padding:0;list-style:none}
+.ticks li{line-height:1.75;padding-inline-start:16px;position:relative}
+.ticks li::before{content:"";position:absolute;inset-inline-start:0;top:.62em;width:6px;height:6px;background:var(--ink)}
+
+/* the tab strip: even cells, no cramping ------------------------------- */
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-top:var(--gap)}
+.tab-btn{display:inline-flex;align-items:center;gap:7px;padding:9px 13px;min-height:38px;line-height:1.3}
+
+/* motion -------------------------------------------------------------- */
+@keyframes nl-rise{from{opacity:0;transform:translate3d(0,8px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
+@keyframes nl-scale{from{opacity:0;transform:scale(.985)}to{opacity:1;transform:scale(1)}}
+@keyframes nl-toast{from{opacity:0;transform:translate3d(-50%,10px,0)}to{opacity:1;transform:translate3d(-50%,0,0)}}
+
+.tab-pane:not([hidden]){animation:nl-rise 240ms var(--ease) both}
+.tab-pane:not([hidden]) > .cols > .card,
+.tab-pane:not([hidden]) > .cols-even > .card,
+.tab-pane:not([hidden]) > .stack > .card,
+.tab-pane:not([hidden]) > .card{animation:nl-scale 260ms var(--ease) both}
+.tab-pane:not([hidden]) > .cols > .card:nth-child(2),
+.tab-pane:not([hidden]) > .cols-even > .card:nth-child(2),
+.tab-pane:not([hidden]) > .stack > .card:nth-child(2){animation-delay:40ms}
+.tab-pane:not([hidden]) > .stack > .card:nth-child(3){animation-delay:80ms}
+.tab-pane:not([hidden]) > .stack > .card:nth-child(4){animation-delay:120ms}
+
+.toast:not([hidden]){animation:nl-toast 220ms var(--ease) both}
+.modal-card,.dialog{animation:nl-scale 200ms var(--ease) both}
+.btn:hover,.mini:hover{transform:translateY(-1px)}
+.tbl tbody tr{transition:background-color var(--dur) var(--ease)}
+.tbl tbody tr:hover{background:var(--paper-2)}
+.card{transition:box-shadow var(--dur) var(--ease),border-color var(--dur) var(--ease)}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;
+    transition-duration:.001ms!important;transform:none!important}
+}
+
+/* narrow screens: one column, tighter padding, nothing clipped -------- */
+@media (max-width:880px){
+  .cols,.cols-even,.grid-2,.field-grid{grid-template-columns:minmax(0,1fr)}
+  .card{padding:15px 16px}
+  .tab-btn{flex:1 1 auto;justify-content:center}
+}
+
+/* update card --------------------------------------------------------- */
+.upd-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.upd-ver{font-size:13px;padding:2px 8px;border:1.2px solid var(--ink)}
+.upd-ver.new{border-style:solid;font-weight:700}
+.upd-arrow{opacity:.5}
+.upd-state{font-size:11px;letter-spacing:.06em;text-transform:uppercase;opacity:.8}
+.upd-state.new{opacity:1;font-weight:700}
+.upd-notes{border-inline-start:2px solid var(--ink-faint);padding-inline-start:11px;margin:6px 0 12px;
+  font-size:12.5px;line-height:1.7;max-height:150px;overflow:auto}
+.upd-notes p{margin:0 0 3px}
+#card-update .actions{margin-top:12px}
+
+/* long log / event lines: wrap inside the card instead of sliding off the edge
+   (`.node-title` is a flex row, so `text-overflow:ellipsis` never applied and
+   long messages used to spill out of the box) */
+.node-list{min-width:0}
+.node-row{align-items:flex-start;flex-wrap:wrap;row-gap:4px;padding:8px 10px}
+.node-title{
+  flex:1 1 60%;min-width:0;flex-wrap:wrap;align-items:flex-start;
+  white-space:normal;overflow-wrap:anywhere;text-overflow:clip;line-height:1.5;
+  unicode-bidi:isolate;text-align:start;
+}
+.node-title .badge{flex:0 0 auto}
+.node-row > .mono{flex:0 0 auto;margin-inline-start:auto;align-self:flex-start}
+
+/* any long machine string (paths, error text, links) must break inside its box */
+.node-row > .mono,.note-inline,.hint.mono,.console,.code-line,.lk-uri,.ep-val{
+  white-space:normal;overflow-wrap:anywhere;word-break:break-word;max-width:100%;
+}
+.note-inline{unicode-bidi:isolate}
+
+/* chips never shrink or split a word */
+.chips{gap:6px}
+.chip{flex:0 0 auto;white-space:nowrap;line-height:1.7}
+.proto-card{padding:15px 16px;gap:9px;min-width:0}
+.proto-name{overflow-wrap:anywhere}
+
+/* rows made of two cards: the grid children carry no extra margins */
+.stack > .cols,.stack > .cols-even,.stack > .card,.stack > .grid-2{margin-top:0}
+.stack > .card{padding:18px 20px}
+
+/* the deployment-facts table should read like a list, not stretch */
+#pane-settings .card-subtle .tbl th,
+#pane-settings .card-subtle .tbl td{padding:7px 10px;font-size:12px}
+#pane-settings .card-subtle .tbl th{width:38%;text-align:start;opacity:.75;font-weight:400}
+
+/* footer must never crush into the strip above it ----------------------- */
+footer.colophon-wrap,footer{margin-top:26px}
+.colophon{
+  border-top:1px dotted var(--ink-faint);padding-top:14px;margin:0;
+  display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;row-gap:10px;
+}
+.colophon > *{flex:0 0 auto}
+.colophon .mono{letter-spacing:.08em}
+@media (max-width:640px){
+  .colophon{gap:10px 12px}
+  .colophon > .mono:first-child{flex:1 1 100%}
+}
+
+/* ── update banner (dashboard) ─────────────────────────────────────────── */
+.upd-banner{
+  display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;
+  border:1.5px solid var(--ink);background:var(--paper);padding:11px 14px;
+  margin-bottom:var(--gap);position:relative;
+  transition:background-color var(--dur) var(--ease),border-color var(--dur) var(--ease);
+}
+.upd-badge{
+  display:inline-flex;align-items:center;gap:7px;flex:0 0 auto;
+  font-family:var(--en-font);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+  border:1.2px solid var(--ink);padding:3px 8px;background:var(--paper-2);
+}
+.upd-badge.ok{border-color:var(--ok);color:var(--ok)}
+.upd-badge.new{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.upd-text{flex:1 1 260px;min-width:0;font-size:12.5px;line-height:1.6}
+.upd-text b{font-weight:700}
+.upd-actions{display:flex;flex-wrap:wrap;gap:8px;flex:0 0 auto;margin-inline-start:auto}
+.upd-dot{width:7px;height:7px;background:currentColor;border-radius:50%;animation:upd-pulse 1.8s var(--ease) infinite}
+@keyframes upd-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.72)}}
+
+/* a pending release gently nudges the whole strip, once every few seconds */
+.upd-banner.new{animation:upd-nudge 6s var(--ease) infinite;box-shadow:0 0 0 2px var(--paper),0 0 0 3.5px var(--ink)}
+@keyframes upd-nudge{
+  0%,88%,100%{transform:translate3d(0,0,0)}
+  90%{transform:translate3d(-3px,0,0)}
+  92%{transform:translate3d(3px,0,0)}
+  94%{transform:translate3d(-2px,0,0)}
+  96%{transform:translate3d(2px,0,0)}
+}
+.upd-banner.new .upd-badge.new{animation:upd-glow 2.4s var(--ease) infinite}
+@keyframes upd-glow{0%,100%{opacity:1}50%{opacity:.72}}
+@media (prefers-reduced-motion:reduce){
+  .upd-banner.new,.upd-dot,.upd-banner.new .upd-badge.new{animation:none!important}
+}
+@media (max-width:640px){
+  .upd-banner{padding:10px 12px}
+  .upd-actions{margin-inline-start:0;width:100%}
+  .upd-actions .btn{flex:1 1 auto;justify-content:center}
+}
+
+/* deployment facts: two compact columns instead of a 10-row table */
+.facts-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--ink-faint);border:1px solid var(--ink-faint)}
+.facts-grid .fact{background:var(--paper);padding:7px 9px;min-width:0;display:flex;flex-direction:column;gap:2px}
+.facts-grid .fact span{font-size:10px;letter-spacing:.09em;text-transform:uppercase;opacity:.6}
+.facts-grid .fact b{font-size:11.5px;font-weight:400;overflow-wrap:anywhere;line-height:1.4}
+@media (max-width:560px){.facts-grid{grid-template-columns:minmax(0,1fr)}}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   1.0.3 · toast that stays inside the panel
+   The old animation slid the toast by -50% of its own width (a leftover from
+   a centred variant), which pushed it out of the viewport on RTL layouts and
+   clipped the text. Now it only rises, is clamped to the viewport, wraps and
+   never sits under the free badge.
+   ═══════════════════════════════════════════════════════════════════════ */
+@keyframes nl-toast-rise{
+  from{opacity:0;transform:translate3d(0,12px,0)}
+  to{opacity:1;transform:translate3d(0,0,0)}
+}
+.toast{
+  position:fixed;
+  bottom:max(20px,env(safe-area-inset-bottom,0px) + 12px);
+  inset-inline-end:max(20px,env(safe-area-inset-right,0px));
+  inset-inline-start:auto;
+  z-index:130;
+  max-width:min(360px,calc(100vw - 32px));
+  padding:11px 15px;
+  line-height:1.55;
+  text-align:start;
+  white-space:normal;
+  overflow-wrap:anywhere;
+  word-break:break-word;
+}
+.toast:not([hidden]){animation:nl-toast-rise 220ms var(--ease) both}
+.toast.warn{border-style:dashed}
+/* keep the small free badge clear of the toast on narrow screens */
+@media (max-width:520px){
+  .toast{bottom:max(16px,env(safe-area-inset-bottom,0px));inset-inline-end:12px;max-width:calc(100vw - 24px);font-size:12.5px}
+}
+
+/* ── iran routing pane ─────────────────────────────────────────────── */
+.rt-status{
+  display:flex;align-items:flex-start;gap:8px;
+  margin-top:12px;padding:9px 11px;font-size:12px;line-height:1.6;
+  border:1px dashed var(--ink-faint);background:var(--paper-2);
+}
+.rt-status svg{flex:0 0 auto;margin-top:2px}
+.rt-status.ok{border-style:solid}
+.rt-status.warn{border-style:dashed;opacity:.9}
+
+.rt-files{display:flex;flex-direction:column;gap:6px}
+.rt-file{
+  display:flex;align-items:center;gap:9px;
+  padding:8px 10px;border:1px solid var(--ink-faint);background:var(--paper-2);
+}
+.rt-file-ic{display:inline-flex;flex:0 0 auto;color:var(--ink-faint)}
+.rt-file-main{display:flex;flex-direction:column;gap:2px;flex:1 1 auto;min-width:0}
+.rt-file .mono{
+  display:block;min-width:0;font-size:11.5px;font-weight:700;
+  direction:ltr;unicode-bidi:isolate;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.rt-file-label{font-size:11px;color:var(--ink-faint);line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rt-file-actions{display:flex;gap:6px;flex:0 0 auto}
+.rt-file .mini{width:auto;min-width:40px;white-space:nowrap;flex:0 0 auto;display:inline-flex;align-items:center;gap:4px;padding:4px 7px;min-height:26px;line-height:1;font-size:11px;letter-spacing:.04em}
+@media (max-width:560px){
+  .rt-file .mini span{display:none}
+  .rt-file .mini{padding:4px 6px}
+}
+#pane-routing .repo-chip{align-self:flex-start;margin-top:10px}
+#pane-routing .console{white-space:pre;overflow:auto;direction:ltr;text-align:left;font-size:11.5px;line-height:1.6}
+
+#pane-routing .cols{align-items:stretch}
+
+/* ── "no domain / no tcp proxy" rescue card ────────────────────────── */
+.hosts-alert{
+  border:2px solid var(--ink);background:var(--paper-2);
+  box-shadow:var(--sh-d) var(--sh-d) 0 0 var(--sh-c);
+  padding:14px 16px;margin-bottom:var(--gap);
+}
+.hosts-alert-head{display:flex;align-items:center;gap:8px;font-size:13px;line-height:1.5}
+.hosts-alert-head svg{flex:0 0 auto}
+.hosts-alert .field-grid{margin-bottom:10px}
+@media (max-width:640px){ .hosts-alert .field-grid{grid-template-columns:minmax(0,1fr)} }

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="_base.css">
+<style>
+  .head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:3px solid var(--ink);padding-bottom:14px;margin-top:24px}
+  .head h2{font-size:44px;font-weight:700;line-height:1.25}
+  .head .en{font-family:"JBM",monospace;font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);margin-top:8px;direction:ltr;text-align:right}
+  /* steps run right → left, because the sheet is RTL */
+  .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:26px;border:1.5px solid var(--ink);background:var(--paper)}
+  .step{padding:18px 16px 16px;border-inline-start:1.5px solid var(--ink);position:relative;background:var(--paper)}
+  .step:first-child{border-inline-start:0}
+  .step .no{font-family:"JBM",monospace;font-size:30px;font-weight:700;line-height:1;color:var(--ink);opacity:.92}
+  .step .k{display:flex;align-items:center;gap:6px;font-size:15px;font-weight:700;margin-top:10px}
+  .step .k .ic{width:15px;height:15px}
+  .step p{font-size:12.5px;line-height:1.8;color:var(--ink2);margin-top:7px}
+  .step .cmd{margin-top:10px;font-family:"JBM",monospace;font-size:11px;direction:ltr;text-align:left;background:var(--paper2);border:1px solid var(--ink);padding:5px 7px;color:var(--ink);word-break:break-all}
+  .env{margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .env .card{padding:14px 16px}
+  .env .t{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:700;border-bottom:1.5px solid var(--ink);padding-bottom:8px;margin-bottom:8px}
+  .kv{display:flex;align-items:baseline;gap:10px;padding:5px 0;border-bottom:1px dotted var(--faint);font-size:12.5px}
+  .kv:last-child{border-bottom:0}
+  .kv b{font-family:"JBM",monospace;font-size:11.5px;letter-spacing:.03em;direction:ltr;min-width:150px}
+  .kv span{color:var(--ink2)}
+  .foot{display:flex;align-items:center;justify-content:space-between;border-top:1.5px solid var(--ink);margin-top:22px;padding-top:13px;font-family:"JBM",monospace;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+  .foot .free{color:var(--ink);font-family:"Vazir",sans-serif;font-size:14px;font-weight:700;letter-spacing:0;text-transform:none}
+</style>
+</head>
+<body>
+<div class="sheet light">
+  <div class="grain"></div>
+  <div class="pad">
+    <div class="topline">
+      <span class="mono">NIGHTLINE / RAILWAY</span>
+      <span class="bar"></span>
+      <span class="mono">DEPLOY IN FIVE STEPS</span>
+      <span class="bar"></span>
+      <span class="mono">~10 MINUTES</span>
+    </div>
+
+    <div class="head">
+      <div>
+        <h2>نصب روی Railway در پنج گام</h2>
+        <div class="en">ONE SERVICE · ONE DOCKERFILE · ONE VOLUME · ONE TCP PROXY</div>
+      </div>
+      <div class="stamp" style="font-family:'JBM',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;border:1.5px solid var(--ink);padding:7px 11px;background:var(--paper2);box-shadow:4px 4px 0 var(--sh)">NO TERMINAL NEEDED</div>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="no">01</div>
+        <div class="k"><svg class="ic"><use href="#i-link"/></svg>مخزن را وصل کنید</div>
+        <p>مخزن را فورک کنید و در Railway گزینهٔ Deploy from GitHub را بزنید؛ Builder روی Dockerfile تنظیم می‌شود.</p>
+        <div class="cmd">git clone &lt;repo&gt; &amp;&amp; npm i</div>
+      </div>
+      <div class="step">
+        <div class="no">02</div>
+        <div class="k"><svg class="ic"><use href="#i-server"/></svg>سرویس را بسازید</div>
+        <p>یک سرویس تازه با ایمیج Dockerfile؛ پورت داخلی ۸۰۸۰ است و همان پورت در Networking عمومی می‌شود.</p>
+        <div class="cmd">PORT=8080</div>
+      </div>
+      <div class="step">
+        <div class="no">03</div>
+        <div class="k"><svg class="ic"><use href="#i-save"/></svg>والیوم را وصل کنید</div>
+        <p>یک والیوم با مسیر <span class="mono">/data</span> اضافه کنید؛ پنل، کانفیگ‌ها و آمار مصرف همان‌جا می‌مانند.</p>
+        <div class="cmd">DATA_DIR=/data</div>
+      </div>
+      <div class="step">
+        <div class="no">04</div>
+        <div class="k"><svg class="ic"><use href="#i-plug"/></svg>TCP proxy بسازید</div>
+        <p>یک TCP proxy به پورت داخلی <span class="mono">8443</span> وصل کنید؛ همهٔ پروتکل‌ها از همین یک پورت بیرون می‌آیند.</p>
+        <div class="cmd">NL_TCP_PORT=8443</div>
+      </div>
+      <div class="step">
+        <div class="no">05</div>
+        <div class="k"><svg class="ic"><use href="#i-rocket"/></svg>وارد پنل شوید</div>
+        <p>صفحهٔ <span class="mono">/setup</span> را باز کنید، حساب مدیر را بسازید، ورودی و کاربر اضافه کنید و لینک‌ها را بردارید.</p>
+        <div class="cmd">https://&lt;app&gt;/setup</div>
+      </div>
+    </div>
+
+    <div class="env">
+      <div class="card">
+        <div class="t"><svg class="ic"><use href="#i-key"/></svg>متغیرهایی که خودتان می‌گذارید</div>
+        <div class="kv"><b>DATA_DIR</b><span>مسیر والیوم برای سند داده و کانفیگ‌ها</span></div>
+        <div class="kv"><b>NL_TCP_PORT</b><span>پورت داخلی که TCP proxy باید هدف بگیرد</span></div>
+        <div class="kv"><b>NL_XRAY_BIN</b><span>مسیر باینری Xray داخل ایمیج</span></div>
+        <div class="kv"><b>NL_SINGBOX_BIN</b><span>مسیر باینری sing-box</span></div>
+        <div class="kv"><b>NL_MAX_USERS</b><span>سقف تعداد کاربران</span></div>
+      </div>
+      <div class="card">
+        <div class="t"><svg class="ic"><use href="#i-cloud-up"/></svg>آن‌چه Railway خودکار می‌دهد</div>
+        <div class="kv"><b>PORT</b><span>پورت پنل</span></div>
+        <div class="kv"><b>RAILWAY_PUBLIC_DOMAIN</b><span>دامنهٔ HTTPS پنل</span></div>
+        <div class="kv"><b>RAILWAY_TCP_PROXY_DOMAIN</b><span>میزبان TCP proxy</span></div>
+        <div class="kv"><b>RAILWAY_TCP_PROXY_PORT</b><span>پورت عمومی TCP</span></div>
+        <div class="kv"><b>RAILWAY_VOLUME_MOUNT_PATH</b><span>مسیر والیوم</span></div>
+      </div>
+    </div>
+
+    <div class="foot">
+      <span>NIGHTLINE · RAILWAY · EDITION 1.0.4</span>
+      <span class="free">پیش از استقرار: <span class="mono">npm run check</span> را اجرا کنید</span>
+      <span>FREE &amp; NOT FOR SALE</span>
+    </div>
+  </div>
+</div>
+<script>
+  fetch('/sprite.svg').then((r) => r.text()).then((t) => document.body.insertAdjacentHTML('beforeend', t));
+</script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="_base.css">
+<style>
+  .hero{padding:0}
+  .wordwrap{display:flex;align-items:center;gap:20px;margin-top:18px}
+  h1.word{font-size:152px}
+  .body{display:grid;grid-template-columns:1fr 620px;gap:44px;align-items:start;margin-top:26px}
+  .lead{font-size:22px;line-height:1.85;color:var(--ink)}
+  .lead b{font-weight:700}
+  .en{font-family:"JBM",monospace;font-size:14px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint);margin-top:14px;direction:ltr;text-align:right}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+  .mux{padding:18px 20px;direction:ltr;text-align:left}
+.mini{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:26px}
+.mini .m{border:1.5px solid var(--ink);background:var(--paper2);padding:11px 13px}
+.mini .m .t{display:flex;align-items:center;gap:7px;font-size:13.5px;font-weight:700}
+.mini .m .d{font-family:"JBM",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-top:6px;direction:ltr;text-align:right}
+  .mux .title{display:flex;align-items:center;justify-content:space-between;font-family:"JBM",monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);border-bottom:1.5px solid var(--ink);padding-bottom:9px}
+  .row{display:flex;align-items:center;gap:10px;font-family:"JBM",monospace;font-size:13.5px;padding:8px 0;border-bottom:1px dotted var(--faint)}
+  .row:last-child{border-bottom:0}
+  .row .k{flex:1;letter-spacing:.02em}
+  .row .v{color:var(--faint)}
+  .row .dot{width:7px;height:7px;background:var(--ink);flex:none}
+  .head{display:flex;align-items:center;gap:12px;justify-content:space-between;border:1.5px solid var(--ink);background:var(--paper2);padding:12px 16px;margin-bottom:10px;font-family:"JBM",monospace;font-size:15px;letter-spacing:.1em}
+  .head .big{font-size:19px;font-weight:700;letter-spacing:.04em}
+  .strip{display:flex;align-items:center;justify-content:space-between;gap:24px;border-top:1.5px solid var(--ink);margin-top:34px;padding-top:16px}
+  .free{display:flex;align-items:center;gap:11px;font-size:17px;font-weight:700}
+  .free .mono{font-size:13px;letter-spacing:.14em;color:var(--ink2);font-weight:400}
+  .stat{display:flex;gap:34px;font-family:"JBM",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);text-align:right}
+  .stat b{display:block;color:var(--ink);font-size:17px;letter-spacing:.02em;margin-top:4px}
+</style>
+</head>
+<body>
+<div class="sheet dark">
+  <div class="grain"></div>
+  <div class="pad">
+    <div class="topline">
+      <span class="mono">NIGHTLINE / RAILWAY</span>
+      <span class="bar"></span>
+      <span class="mono">SELF-HOSTED · ONE CONTAINER · ONE PORT</span>
+      <span class="bar"></span>
+      <span class="mono">EDITION 1.0.4</span>
+    </div>
+
+    <div class="wordwrap">
+      <h1 class="word">NIGHTLINE</h1>
+      <span class="tag"><svg class="ic"><use href="#i-railway"/></svg>RAILWAY</span>
+    </div>
+
+    <div class="body">
+      <div>
+        <div class="lead">پنل مدیریت یک‌پارچه برای <b>Xray</b>، <b>sing-box</b> و پروکسی‌های <b>تلگرام</b> — یک کانتینر Railway، یک پورت TCP، و همهٔ لینک‌های اشتراک از یک جایگاه.</div>
+        <div class="en">24 PROTOCOLS · EASY SETUP · RAILYNX CLEAN-IP · XRAY + SING-BOX + MTG · FA / EN</div>
+        <div class="chips">
+          <span class="chip inv">VLESS · REALITY</span>
+          <span class="chip">TROJAN</span>
+          <span class="chip">SHADOWSOCKS</span>
+          <span class="chip">ANYTLS</span>
+          <span class="chip">HYSTERIA2</span>
+          <span class="chip">TUIC</span>
+          <span class="chip">WIREGUARD</span>
+          <span class="chip">SOCKS5</span>
+          <span class="chip">HTTP CONNECT</span>
+          <span class="chip red">MTPROTO</span>
+        </div>
+        <div class="mini">
+          <div class="m">
+            <div class="t"><svg class="ic"><use href="#i-layers"/></svg>۲۴ پروتکل آماده</div>
+            <div class="d">PRESET CATALOG</div>
+          </div>
+          <div class="m">
+            <div class="t"><svg class="ic"><use href="#i-qr"/></svg>۵ فرمت اشتراک + QR</div>
+            <div class="d">LINK · BASE64 · XRAY · CLASH</div>
+          </div>
+          <div class="m">
+            <div class="t"><svg class="ic"><use href="#i-gauge"/></svg>حجم، انقضا و آمار</div>
+            <div class="d">PER-USER QUOTA &amp; TRAFFIC</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="head">
+          <span><svg class="ic" style="vertical-align:-3px"><use href="#i-layers"/></svg> ONE PORT · TCP MUX</span>
+          <span class="big mono">:443</span>
+        </div>
+        <div class="card mux">
+          <div class="title"><span>TLS — SNI ROUTER</span><span>EDGE</span></div>
+          <div class="row"><span class="dot"></span><span class="k">vless · trojan · ws · grpc</span><span class="v">XRAY :11000</span></div>
+          <div class="row"><span class="dot"></span><span class="k">ss-2022 · anytls · hysteria2</span><span class="v">SING-BOX :11001</span></div>
+          <div class="row"><span class="dot"></span><span class="k">mtproto + fake-tls</span><span class="v">MTG :11002</span></div>
+          <div class="row"><span class="dot"></span><span class="k">socks5 · http connect</span><span class="v">:1080 / :1081</span></div>
+          <div class="row"><span class="dot"></span><span class="k">https panel · subscriptions</span><span class="v">:8080</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="strip">
+      <div class="free">
+        <svg class="ic"><use href="#i-shield"/></svg>
+        <span>۱۰۰٪ رایگان — فروش پنل، سورس یا لینک ممنوع است</span>
+        <span class="mono">FREE &amp; NOT FOR SALE</span>
+      </div>
+      <div class="stat">
+        <div>CORES<b>XRAY + SING-BOX + MTG</b></div>
+        <div>SUBS<b>5 FORMATS</b></div>
+        <div>PANEL<b>FA / EN</b></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  fetch('/sprite.svg').then((r) => r.text()).then((t) => document.body.insertAdjacentHTML('beforeend', t));
+</script>
+</body>
+</html>
